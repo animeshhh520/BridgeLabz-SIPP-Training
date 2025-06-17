@@ -1,54 +1,47 @@
 import java.util.Scanner;
-import java.util.Arrays;
 
-public class factors {
-
+public class Factors {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        System.out.print("Enter a number to find its factors: ");
+
+        // 1. Take the input for a number
+        System.out.print("Enter a number: ");
         int number = scanner.nextInt();
 
-        if (number <= 0) {
-            System.out.println("Please enter a positive number.");
-            scanner.close();
-            return;
-        }
-
+        // 2. Find the factors of the number and save them in an array.
         int maxFactor = 10;
         int[] factors = new int[maxFactor];
         int index = 0;
 
-        System.out.println("\nFinding factors for " + number + "...");
-
+        // 3. To find factors, loop through the numbers from 1 to the number
         for (int i = 1; i <= number; i++) {
+            // find the factors
             if (number % i == 0) {
-                if (index == factors.length) {
-                    int newCapacity = factors.length * 2;
-                    System.out.println("Array full, resizing from " + factors.length + " to " + newCapacity);
-                    int[] temp = new int[newCapacity];
+                // and add them to the array element by incrementing the index
+                factors[index] = i;
+                index++;
 
+                // If the index is equal to maxIndex, then the need factors array to store more elements
+                if (index == maxFactor) {
+                    // 4. To store more elements, reset the maxIndex to twice its size
+                    maxFactor *= 2;
+                    // use the temp array to store the elements from the factors array
+                    int[] temp = new int[maxFactor];
                     for (int j = 0; j < factors.length; j++) {
                         temp[j] = factors[j];
                     }
+                    // and eventually assign the factors array to the temp array
                     factors = temp;
                 }
-                factors[index] = i;
-                index++;
             }
         }
 
-        System.out.println("\nFactors of " + number + " are:");
-        if (index == 0) {
-            System.out.println("No factors found (this should not happen for positive integers, as 1 is always a factor).");
-        } else {
-            for (int i = 0; i < index; i++) {
-                System.out.print(factors[i]);
-                if (i < index - 1) {
-                    System.out.print(", ");
-                }
-            }
-            System.out.println();
+        // 5. Finally, display the factors of the number
+        System.out.print("Factors of " + number + " are: ");
+        for (int i = 0; i < index; i++) {
+            System.out.print(factors[i] + " ");
         }
+        System.out.println();
 
         scanner.close();
     }
