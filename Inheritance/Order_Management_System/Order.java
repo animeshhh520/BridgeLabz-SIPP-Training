@@ -7,6 +7,7 @@ public class Order {
         this.orderID=orderID;
         this.orderDate=orderDate;
     }
+
     public void orderStatus(){
         System.out.printf("Order %s placed on %s is confirmed",orderID,orderDate);
         System.out.println();
